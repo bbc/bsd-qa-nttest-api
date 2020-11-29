@@ -1,0 +1,30 @@
+{
+  "name": "bsd-qa-nttest-api",
+  "version": "1.0.0",
+  "description": "repo for all nt endpoints",
+  "scripts": {
+    "test": "mocha",
+    "prestart": "npm install;",
+    "test-suite": "mocha --config './settings/.mocharc.js'",
+    "test-suite-mediaitem": "mocha -g 'Mediaitem endpoints' --config './settings/.mocharc.js'",
+    "test-get-mediaitem": "mocha -g 'It should be able to return body of a mediaitem' --config './settings/.mocharc.js'",
+    "test-create-mediaitem": "mocha -g 'It should be possible to Create a mediaItem' --config './settings/.mocharc.js'",
+    "test-edit-mediaitem": "mocha -g 'It should be possible to edit the metadata of an item' --config './settings/.mocharc.js'",
+    "test-create-attachment": "mocha -g 'It should be able to create an attachment for a media item' --config './settings/.mocharc.js'",
+    "test-delete-attachment": "mocha -g 'It should be able to delete an attachment for a media item' --config './settings/.mocharc.js'",
+    "test-publish-placeholder": "mocha -g 'It should be able to create a placeholder' --config './settings/.mocharc.js'",
+    "test-attachment": "mocha ./test/attachment-controller-tests.js",
+    "test-mediaitem": "mocha ./test/media-item-controller-tests.js  --timeout 25000 --colors"
+  },
+  "author": "cheuni02",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "mocha": "^8.1.3",
+    "mocha-jenkins-reporter": "^0.4.5",
+    "mocha-testrail-reporter": "^1.0.12",
+    "supertest": "^5.0.0",
+    "testrail-api": "^1.3.6"
+  }
+}
