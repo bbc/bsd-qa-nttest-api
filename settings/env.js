@@ -1,14 +1,11 @@
 const { agent } = require('supertest');
+const { apiAuth, baseUrl } =  require('../config');
 var should = require('chai').should(),
     expect = require('chai').expect,
     supertest = require('supertest'),
-    auth = require('../config.json').api,
-    api = supertest('https://test-api.jupiter.bbc.co.uk'),
+    api = supertest(baseUrl),
     Testrail = require('testrail-api');
 
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
-process.env['JUNIT_REPORT_PATH'] = 'test-result/result.xml';
-process.env['JUNIT_REPORT_STACK'] = 1;
 
 var testrail = new Testrail({
    host: 'https://bbcpodtest.testrail.com',
@@ -38,7 +35,7 @@ var error = timeout => {
     should: should,
     expect: expect,
     supertest: supertest,
-    auth: auth,
+    auth: apiAuth,
     api: api,
     sleep: sleep,
     error: error,
