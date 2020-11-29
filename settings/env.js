@@ -3,14 +3,12 @@ var should = require('chai').should(),
     expect = require('chai').expect,
     supertest = require('supertest'),
     auth = require('../config.json').api,
-    api = supertest('https://test-api.jupiter.bbc.co.uk');
+    api = supertest('https://test-api.jupiter.bbc.co.uk'),
+    Testrail = require('testrail-api');
 
-    process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
-    process.env['JUNIT_REPORT_PATH'] = 'test-result/result.xml';
-    process.env['JUNIT_REPORT_STACK'] = 1;
-
-
-var Testrail = require('testrail-api');
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+process.env['JUNIT_REPORT_PATH'] = 'test-result/result.xml';
+process.env['JUNIT_REPORT_STACK'] = 1;
 
 var testrail = new Testrail({
    host: 'https://bbcpodtest.testrail.com',
