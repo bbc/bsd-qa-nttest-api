@@ -1,5 +1,5 @@
-const env = '../settings/env';
-const { expect, should, supertest, api, auth, sleep, error } = require(env);
+const conf = '../lib/common';
+const { expect, should, supertest, api, auth, sleep, error } = require(conf);
 
 describe('Attachment endpoints', function(){
 

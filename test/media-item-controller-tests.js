@@ -1,40 +1,21 @@
-const env = '../settings/env';
-const { expect, should, supertest, api, auth, sleep, error, testrail } = require(env);
+const conf = '../lib/common';
+const testrailApi = '../lib/test-rail-api';
+const { siteId, expect, should, supertest, api, auth, sleep, error, testrail, runId } = require(conf);
+const { testGetTestcase, updateTestCase } = require(testrailApi);
+
+var createRequestId, mediaItemId = 0;
+var resultStatus, resultComment;
+var dateTime = new Date();
+var eventDate = dateTime.toISOString().split('Z')[0];
+var randString = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+
 
 describe('Mediaitem endpoints', function(){
-
-    var dateTime = new Date();
-    var eventDate = dateTime.toISOString().split('Z')[0];
-    var randString = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
-
-    // beforeEach(function(done) {
-    //   this.createRequestId.value = 0;
-    // });
-
-    // afterEach(function(done) {
-    //   this.createRequestId.close(done);
-    // });
     
-    it('C1184293 It should be possible to Create a mediaItem', function(done){
-
-      var createRequestId, mediaItemId = 0;
-      var site = 76;
-      var runId = 0;
-
-      // testrail.getCases(/*PROJECT_ID=*/151, /*FILTERS=*/{ suite_id: 6923, section_id: 138481 }, function (err, response, cases) {
-      //   console.log("response: " + response.body);
-      //   console.log("testcases: " + cases);
-      // });
-
-      // testrail.addRun(/*PROJECT_ID=*/151, /*CONTENT=*/{ suite_id: 6923 }, function (err, response, run) {
-      //   console.log("response after adding run: " + response.body);
-      //   runId = JSON.stringify(run.id);
-      //   console.log("Run id: " + runId);
-      //   console.log("err: " + err);
-      // }); 
+    it('C45169426 It should be possible to Create a mediaItem', function(done){
 
 
-      api.post('/v1/mediaitem/site/' + site)
+      api.post('/v1/mediaitem/site/' + siteId)
           .set(auth)
           .send(
               {
@@ -91,7 +72,7 @@ describe('Mediaitem endpoints', function(){
             expect(res.status).to.equal(202);
             expect(res.body).to.have.property('requestId');
             createRequestId = res.body.requestId;
-            api.get('/v1/requeststatus/site/76/request/' + createRequestId)
+            api.get('/v1/requeststatus/site/' + siteId + '/request/' + createRequestId)
                 .set(auth)
                 .expect('Content-Type', /json/)
                 .end(function (err, res){
@@ -100,35 +81,15 @@ describe('Mediaitem endpoints', function(){
                   expect(res.status).to.equal(200);
                   mediaItemId = res.body.mediaItemURN.mediaitemId;
                   console.log("mediaItemId: " + mediaItemId);  
+                  updateTestCase(runId, 1184293, 1, 'brought to you by S099380');
                 });   
             done();
           });
-
-          // testrail.updateRun(/*RUN_ID=*/runId, /*CONTENT=*/{}, function (err, response, run) {
-          //   console.log("update test run: " + response.body);
-          //   console.log(run);
-          //   // done();
-          // });    
-
-          // testrail.addResult(/*TEST_ID=*/"C1184293", /*CONTENT=*/{}, function (err, response, result) {
-          //   console.log(result);
-            
-            
-          // });
-
-          // testrail.addResultForCase(/*RUN_ID=*/"R165696", /*CASE_ID=*/"C1184293", /*CONTENT=*/{ suite_id: 6923 }, function (err, response, result) {
-          //   console.log(">>> runId: " + runId);
-          //   console.log(">>> err: " + err.body)
-          //   console.log(">>> response" + response.body);
-          //   console.log(">> result: " + result);
-          //   done();
-          // });
-
   });
 
 
   it('C1184294 It should be able to return body of a mediaitem', function(done){
-      api.get('/v1/mediaitem/site/76/item/4198')
+      api.get('/v1/mediaitem/site/' + siteId + '/item/4198')
           .set(auth)
           .end(function(err, res){
             console.log(res.status);
@@ -139,7 +100,7 @@ describe('Mediaitem endpoints', function(){
   });
 
   it('C1184295 It should be possible to edit the metadata of an item', function(done){
-      api.put('/v1/mediaitem/site/76/item/4198')
+      api.put('/v1/mediaitem/site/' + siteId + '/item/4198')
           .set(auth)
           .send(
               {
@@ -191,7 +152,5 @@ describe('Mediaitem endpoints', function(){
           });
 
   });
-
-
 
 });
