@@ -1,5 +1,5 @@
-const conf = '../lib/common';
-const { expect, should, supertest, api, auth, sleep, error } = require(conf);
+const common = '../lib/common';
+const { expect, should, supertest, api, auth, sleep, error } = require(common);
 
 describe('Attachment endpoints', function(){
 

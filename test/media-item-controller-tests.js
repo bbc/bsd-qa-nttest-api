@@ -1,10 +1,13 @@
-const conf = '../lib/common';
+const common = '../lib/common';
 const testrailApi = '../lib/test-rail-api';
-const { siteId, expect, should, supertest, api, auth, sleep, error, testrail, runId } = require(conf);
-const { testGetTestcase, updateTestCase } = require(testrailApi);
+const { siteId, expect, should, supertest, api, auth, sleep, error, testrail, runId, trTestRunCases } = require(common);
+const { updateTestCase } = require(testrailApi);
 
 var createRequestId, mediaItemId = 0;
-var resultStatus, resultComment;
+var resultStatus = 3;
+var resultComment = '';
+var testRunCaseId = '';
+
 var dateTime = new Date();
 var eventDate = dateTime.toISOString().split('Z')[0];
 var randString = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
@@ -13,7 +16,7 @@ var randString = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)
 describe('Mediaitem endpoints', function(){
     
     it('C45169426 It should be possible to Create a mediaItem', function(done){
-
+      testRunCaseId = trTestRunCases.mediaItemNTTests.tests[0].id;
 
       api.post('/v1/mediaitem/site/' + siteId)
           .set(auth)
@@ -78,10 +81,17 @@ describe('Mediaitem endpoints', function(){
                 .end(function (err, res){
                   console.log(res.body);
                   console.log("createRequestId: " + createRequestId);
-                  expect(res.status).to.equal(200);
-                  mediaItemId = res.body.mediaItemURN.mediaitemId;
-                  console.log("mediaItemId: " + mediaItemId);  
-                  updateTestCase(runId, 1184293, 1, 'brought to you by S099380');
+                  try{
+                    expect(res.status).to.equal(200);
+                    mediaItemId = res.body.mediaItemURN.mediaitemId;
+                    console.log("mediaItemId: " + mediaItemId);
+                    resultStatus = 1;
+                    resultComment = "Tested creating mediaItem " +  mediaItemId + " successfully";
+                  }catch(e){
+                    resultStatus = 5;
+                    resultComment = "Tested creating mediaItem Failed: " +  e;
+                  }                    
+                  updateTestCase(runId, testRunCaseId, resultStatus, resultComment);
                 });   
             done();
           });
