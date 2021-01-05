@@ -49,25 +49,45 @@ describe('Mediaitem endpoints', function(){
 
 
   it('C1184294 It should be able to return body of a mediaitem', function(done){
+      testRunCaseId = trTestRunCases.mediaItemNTTests.tests[1].id;
+
       api.get('/v1/mediaitem/site/' + siteId + '/item/4198')
           .set(auth)
           .end(function(err, res){
-            console.log(res.status);
-            console.log(res.body);
-            res.status.should.equal(200);
+            try{
+              console.log(res.status);
+              console.log(res.body);
+              res.status.should.equal(200);
+              resultStatus = 1;
+              resultComment = "Tested getting details of a mediaItem: pass";
+            }catch(e){
+              resultStatus = 5;
+              resultComment = "Tested getting details of a mediaItem: FAIL - " + e;
+            }
+            updateTestCase(runId, testRunCaseId, resultStatus, resultComment);
             done();
           });        
   });
 
   it('C1184295 It should be possible to edit the metadata of an item', function(done){
+      testRunCaseId = trTestRunCases.mediaItemNTTests.tests[2].id;
+      
       api.put('/v1/mediaitem/site/' + siteId + '/item/4198')
           .set(auth)
           .send(payloads[1])
           .expect('Content-Type', /json/)
           .end(function (err, res){
-            console.log(res.body);
-            expect(res.status).to.equal(202);
-            expect(res.body).to.have.property('requestId');
+            try{
+              console.log(res.body);
+              expect(res.status).to.equal(202);
+              expect(res.body).to.have.property('requestId');
+              resultStatus = 1;
+              resultComment = "Tested amending details of a mediaItem: pass";
+            }catch(e){
+              resultStatus = 5;
+              resultComment = "Tested amending details of a mediaItem: FAIL - " + e;
+            }
+            updateTestCase(runId, testRunCaseId, resultStatus, resultComment);
             done();
           });
 
