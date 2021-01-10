@@ -10,6 +10,11 @@ var resultStatus = 3;
 var resultComment = '';
 var testRunCaseId = '';
 
+const updateResultVars = (res, comment) => {
+  resultStatus = res;
+  resultComment = comment;
+}
+
 describe('Mediaitem endpoints', function(){
     
     it('C45169426 It should be possible to Create a mediaItem', function(done){
@@ -22,7 +27,16 @@ describe('Mediaitem endpoints', function(){
           .end(async function (err, res){
             console.log(res.body);
             await sleep(5000);
-            expect(res.status).to.equal(202);
+            try{
+                expect(res.status).to.equal(202);
+                resultStatus = 1;
+                resultComment = resultComment + "Request sent successfully with 202 \n";
+
+            }catch(e){
+                resultStatus = 5;
+                resultComment = resultComment + "Issue with sending request: " +  e + "\n";
+            }
+            
             expect(res.body).to.have.property('requestId');
             createRequestId = res.body.requestId;
             api.get('/v1/requeststatus/site/' + siteId + '/request/' + createRequestId)
@@ -36,11 +50,11 @@ describe('Mediaitem endpoints', function(){
                     mediaItemId = res.body.mediaItemURN.mediaitemId;
                     console.log("mediaItemId: " + mediaItemId);
                     resultStatus = 1;
-                    resultComment = "Tested creating mediaItem " +  mediaItemId + " successfully";
+                    resultComment = resultComment + "Tested creating mediaItem " +  mediaItemId + " successfully\n";
                   }catch(e){
                     resultStatus = 5;
-                    resultComment = "Tested creating mediaItem Failed: " +  e;
-                  }                    
+                    resultComment = resultComment +  "Tested creating mediaItem Failed: " +  e + "\n";
+                  }                
                   updateTestCase(runId, testRunCaseId, resultStatus, resultComment);
                 });   
             done();
@@ -59,10 +73,12 @@ describe('Mediaitem endpoints', function(){
               console.log(res.body);
               res.status.should.equal(200);
               resultStatus = 1;
-              resultComment = "Tested getting details of a mediaItem: pass";
+              resultComment = resultComment + "Tested getting details of a mediaItem: pass\n";
+              // updateResultVars(1, "Tested getting details of a mediaItem: pass");
             }catch(e){
               resultStatus = 5;
-              resultComment = "Tested getting details of a mediaItem: FAIL - " + e;
+              resultComment = resultComment + "Tested getting details of a mediaItem: FAIL - " + e + "\n";
+              // updateResultVars(5, "Tested getting details of a mediaItem: FAIL - " + e + "\n");
             }
             updateTestCase(runId, testRunCaseId, resultStatus, resultComment);
             done();
@@ -82,10 +98,10 @@ describe('Mediaitem endpoints', function(){
               expect(res.status).to.equal(202);
               expect(res.body).to.have.property('requestId');
               resultStatus = 1;
-              resultComment = "Tested amending details of a mediaItem: pass";
+              resultComment = resultComment + "Tested amending details of a mediaItem: pass \n";
             }catch(e){
               resultStatus = 5;
-              resultComment = "Tested amending details of a mediaItem: FAIL - " + e;
+              resultComment = resultComment + "Tested amending details of a mediaItem: FAIL - " + e + "\n";
             }
             updateTestCase(runId, testRunCaseId, resultStatus, resultComment);
             done();
