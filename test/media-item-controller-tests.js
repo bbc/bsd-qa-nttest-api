@@ -6,12 +6,11 @@ const { siteId, expect, should, supertest, api, auth, sleep, error, testrail, ru
 const { updateTestCase, updateResultVars } = require(testrailApi);
 
 var createRequestId, mediaItemId = 0;
-var resultStatus = 3;
 var testRunCaseId = '';
 
 describe('Mediaitem endpoints', function(){
     
-    it('C45169426 It should be possible to Create a mediaItem', function(done){
+    it('It should be possible to Create a mediaItem', function(done){
       testRunCaseId = trTestRunCases.mediaItemNTTests.tests[0].id;
 
       api.post('/v1/mediaitem/site/' + siteId)
@@ -51,7 +50,7 @@ describe('Mediaitem endpoints', function(){
   });
 
 
-  it('C1184294 It should be able to return body of a mediaitem', function(done){
+  it('It should be able to return body of a mediaitem', function(done){
       testRunCaseId = trTestRunCases.mediaItemNTTests.tests[1].id;
 
       api.get('/v1/mediaitem/site/' + siteId + '/item/4198')
@@ -70,7 +69,7 @@ describe('Mediaitem endpoints', function(){
           });        
   });
 
-  it('C1184295 It should be possible to edit the metadata of an item', function(done){
+  it('It should be possible to edit the metadata of an item', function(done){
       testRunCaseId = trTestRunCases.mediaItemNTTests.tests[2].id;
       
       api.put('/v1/mediaitem/site/' + siteId + '/item/4198')
@@ -90,7 +89,5 @@ describe('Mediaitem endpoints', function(){
             updateTestCase(runId, testRunCaseId);
             done();
           });
-
   });
-
 });

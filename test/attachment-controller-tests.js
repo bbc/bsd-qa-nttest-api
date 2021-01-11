@@ -1,33 +1,31 @@
 const common = '../lib/common';
-const { expect, should, supertest, api, auth, sleep, error } = require(common);
+const testrailApi = '../lib/test-rail-api';
+const payloadsUrl = './payloads/attachment-controller-test-payloads';
+const { payloads } = require(payloadsUrl);
+const { siteId, expect, should, supertest, api, auth, sleep, error, testrail, runId, trTestRunCases } = require(common);
+const { updateTestCase, updateResultVars } = require(testrailApi);
 
 describe('Attachment endpoints', function(){
 
-    before(function (done) {
-        this.timeout(5000);
-        done();
-    });
-
     it('It should be able to create an attachment for a media item', function(done){
+        testRunCaseId = trTestRunCases.attachmentNTTests.tests[0].id;
+
         api.post('/v1/attachment/site/76/item/4198')
             .set(auth)
-            .send(
-                {
-                    "location": {
-                        "storeName": "76.att01",
-                        "path": "4198-original_metadata.xml"
-                    },
-                    "mimeType": "application/xml",
-                    "schemaVersion": "1-0-0",
-                    "type": "Original metadata"
-                }
-            )
+            .send(payloads[0])
             .expect('Content-Type', /json/)
             .end(function (err, res){
             //   console.log(res.body);
               console.log(res.status);
-              expect(res.status).to.equal(202);
-              expect(res.body).to.have.property('requestId');
+              try{
+                expect(res.status).to.equal(202);
+                updateResultVars(1, "request submitted successfully\n");
+                expect(res.body).to.have.property('requestId');
+                updateResultVars(1, "requestId returned\n");
+              }catch(e){
+                updateResultVars(5, "request submitted successfully\n");
+              }
+              updateTestCase(runId, testRunCaseId);
               done();
             });   
     });
