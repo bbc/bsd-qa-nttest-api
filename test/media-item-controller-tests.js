@@ -3,17 +3,16 @@ const testrailApi = '../lib/test-rail-api';
 const payloadsUrl = './payloads/media-item-controller-test-payloads';
 const { payloads } = require(payloadsUrl);
 const { siteId, expect, should, supertest, api, auth, sleep, error, testrail, runId, trTestRunCases } = require(common);
-const { updateTestCase } = require(testrailApi);
+const { updateTestCase, updateResultVars } = require(testrailApi);
 
 var createRequestId, mediaItemId = 0;
 var resultStatus = 3;
-var resultComment = '';
 var testRunCaseId = '';
 
-const updateResultVars = (res, comment) => {
-  resultStatus = res;
-  resultComment = comment;
-}
+// const updateResultVars = (res, comment) => {
+//   resultStatus = res;
+//   resultComment = comment;
+// }
 
 describe('Mediaitem endpoints', function(){
     
@@ -29,9 +28,9 @@ describe('Mediaitem endpoints', function(){
             await sleep(5000);
             try{
                 expect(res.status).to.equal(202);
-                updateResultVars(1, resultComment + "Request sent successfully with 202 \n");
+                updateResultVars(1, "Request sent successfully with 202 \n");
             }catch(e){
-                updateResultVars(5, resultComment + "Issue with sending request: " +  e + "\n");
+                updateResultVars(5, "Issue with sending request: " +  e + "\n");
             }
             
             expect(res.body).to.have.property('requestId');
@@ -46,11 +45,11 @@ describe('Mediaitem endpoints', function(){
                     expect(res.status).to.equal(200);
                     mediaItemId = res.body.mediaItemURN.mediaitemId;
                     console.log("mediaItemId: " + mediaItemId);
-                    updateResultVars(1, resultComment + "Tested creating mediaItem " +  mediaItemId + " successfully\n");
+                    updateResultVars(1, "Tested creating mediaItem " +  mediaItemId + " successfully\n");
                   }catch(e){
-                    updateResultVars(5, resultComment + "Tested creating mediaItem Failed: " +  e + "\n");
+                    updateResultVars(5, "Tested creating mediaItem Failed: " +  e + "\n");
                   }                
-                  updateTestCase(runId, testRunCaseId, resultStatus, resultComment);
+                  updateTestCase(runId, testRunCaseId);
                 });   
             done();
           });
@@ -67,11 +66,11 @@ describe('Mediaitem endpoints', function(){
               console.log(res.status);
               console.log(res.body);
               res.status.should.equal(200);
-              updateResultVars(1, resultComment + "MediaItem 4198 can be returned\n");
+              updateResultVars(1, "MediaItem 4198 can be returned\n");
             }catch(e){
-              updateResultVars(5, resultComment + "Tested getting details of a mediaItem Failed: - " + e + "\n");
+              updateResultVars(5, "Tested getting details of a mediaItem Failed: " + e + "\n");
             }
-            updateTestCase(runId, testRunCaseId, resultStatus, resultComment);
+            updateTestCase(runId, testRunCaseId);
             done();
           });        
   });
@@ -87,13 +86,13 @@ describe('Mediaitem endpoints', function(){
             try{
               console.log(res.body);
               expect(res.status).to.equal(202);
-              updateResultVars(1, resultComment + "Edit request sent successfully with response 202\n");
+              updateResultVars(1, "Edit request sent successfully with response 202\n");
               expect(res.body).to.have.property('requestId');
-              updateResultVars(1, resultComment + "Edit request returns a requestId\n");
+              updateResultVars(1, "Edit request returns a requestId\n");
             }catch(e){
-              updateResultVars(5, resultComment + "Tested amending details of a mediaItem: FAIL - " + e + "\n");
+              updateResultVars(5, "Tested amending details of a mediaItem Failed: " + e + "\n");
             }
-            updateTestCase(runId, testRunCaseId, resultStatus, resultComment);
+            updateTestCase(runId, testRunCaseId);
             done();
           });
 

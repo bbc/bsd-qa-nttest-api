@@ -6,9 +6,7 @@ describe('Publish metadata endpoints', function(){
     var site = 8;
     var dateTime = new Date();
     var eventDate = dateTime.toISOString().split('Z')[0] + "Z";
-    // console.log(eventDate);
     var randString = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 3);
-    // console.log(randString);
 
     it("It should be able to create a placeholder", function(done){
         api.post("/v1/publish/placeholder/site/" + site)
