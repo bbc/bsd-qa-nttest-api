@@ -52,7 +52,7 @@ module.exports = {
       {
         "archiveLogging": {
             "keywords": randString,
-            "language": "French- GB",
+            "language": "FR",
             "locationEditorial": "Perth",
             "reporter": "Jaden Smith"
         },    
