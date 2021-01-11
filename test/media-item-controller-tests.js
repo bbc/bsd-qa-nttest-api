@@ -23,11 +23,11 @@ describe('Mediaitem endpoints', function(){
             try{
                 expect(res.status).to.equal(202);
                 updateResultVars(1, "Request sent successfully with 202 \n");
+                expect(res.body).to.have.property('requestId');
+                updateResultVars(1, "Create request returns a requestId\n");
             }catch(e){
                 updateResultVars(5, "Issue with sending request: " +  e + "\n");
             }
-            
-            expect(res.body).to.have.property('requestId');
             createRequestId = res.body.requestId;
             api.get('/v1/requeststatus/site/' + siteId + '/request/' + createRequestId)
                 .set(auth)

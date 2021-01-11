@@ -15,7 +15,6 @@ describe('Attachment endpoints', function(){
             .send(payloads[0])
             .expect('Content-Type', /json/)
             .end(function (err, res){
-            //   console.log(res.body);
               console.log(res.status);
               try{
                 expect(res.status).to.equal(202);
@@ -25,6 +24,8 @@ describe('Attachment endpoints', function(){
               }catch(e){
                 updateResultVars(5, "request submitted successfully\n");
               }
+                
+
               updateTestCase(runId, testRunCaseId);
               done();
             });   
