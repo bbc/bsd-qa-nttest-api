@@ -9,11 +9,6 @@ var createRequestId, mediaItemId = 0;
 var resultStatus = 3;
 var testRunCaseId = '';
 
-// const updateResultVars = (res, comment) => {
-//   resultStatus = res;
-//   resultComment = comment;
-// }
-
 describe('Mediaitem endpoints', function(){
     
     it('C45169426 It should be possible to Create a mediaItem', function(done){
