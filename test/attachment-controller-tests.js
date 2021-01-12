@@ -33,7 +33,7 @@ describe('Attachment endpoints', function(){
                     createdAttachmentId = res.body.entityIds[0].mediaitemPropertyId
                     expect(res.status).to.equal(200);
                      
-                    api.get('/v1/mediaitem/site/76/item/5791')
+                    api.get('/v1/mediaitem/site/' + siteId + '/item/5791')
                     .set(auth)
                     .expect('Content-Type', /json/)
                     .end(function (err, res){
