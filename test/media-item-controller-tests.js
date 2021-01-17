@@ -7,12 +7,12 @@ const { updateTestCase, updateResultVars } = require(testrailApi);
 
 var createRequestId, mediaItemId = 0;
 var testRunCaseId = '';
+var ItemUnderTestId = trTestRunCases.mediaItemNTTests.mediaItemUnderTest;
 
 describe('Mediaitem endpoints', function(){
     
     it('It should be possible to Create a mediaItem', function(done){
       testRunCaseId = trTestRunCases.mediaItemNTTests.tests[0].id;
-
       api.post('/v1/mediaitem/site/' + siteId)
           .set(auth)
           .send(payloads[0])
@@ -52,8 +52,7 @@ describe('Mediaitem endpoints', function(){
 
   it('It should be able to return body of a mediaitem', function(done){
       testRunCaseId = trTestRunCases.mediaItemNTTests.tests[1].id;
-
-      api.get('/v1/mediaitem/site/' + siteId + '/item/4198')
+      api.get('/v1/mediaitem/site/' + siteId + '/item/' + ItemUnderTestId)
           .set(auth)
           .end(function(err, res){
             try{
@@ -71,8 +70,7 @@ describe('Mediaitem endpoints', function(){
 
   it('It should be possible to edit the metadata of an item', function(done){
       testRunCaseId = trTestRunCases.mediaItemNTTests.tests[2].id;
-      
-      api.put('/v1/mediaitem/site/' + siteId + '/item/4198')
+      api.put('/v1/mediaitem/site/' + siteId + '/item/' + ItemUnderTestId)
           .set(auth)
           .send(payloads[1])
           .expect('Content-Type', /json/)

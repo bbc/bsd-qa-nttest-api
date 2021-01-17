@@ -2,6 +2,7 @@ const suiteId = 6923;
 module.exports = {
     "mediaItemNTTests": {
         "description": "Mediaitem endpoints",
+        "mediaItemUnderTest" : 4198,
         "testSuiteId": suiteId,
         "tests": [{
             "testName": "It should be possible to Create a mediaItem",
@@ -18,6 +19,7 @@ module.exports = {
     },
     "attachmentNTTests": {
         "description": "Attachment endpoints",
+        "mediaItemUnderTest" : 5791,
         "testSuiteId": suiteId,
         "tests": [{
             "testName": "It should be able to create an attachment for a media item",
