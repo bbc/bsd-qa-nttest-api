@@ -12,6 +12,9 @@
     "test-edit-mediaitem": "mocha -g 'It should be possible to edit the metadata of an item' --config './settings/.mocharc.js'",
     "test-create-attachment": "mocha -g 'It should be able to create an attachment for a media item' --config './settings/.mocharc.js'",
     "test-delete-attachment": "mocha -g 'It should be able to delete an attachment for a media item' --config './settings/.mocharc.js'",
+    "test-create-part": "mocha -g 'It should be able to create a part for a mediaitem' --config './settings/.mocharc.js'",
+    "test-delete-part": "mocha -g 'It should be able to delete a part for a mediaitem' --config './settings/.mocharc.js'",
+    "test-bulk-create-part": "mocha -g 'It should be able to bulk create a part for a mediaitem' --config './settings/.mocharc.js'",
     "test-publish-placeholder": "mocha -g 'It should be able to create a placeholder' --config './settings/.mocharc.js'",
     "test-attachment": "mocha ./test/attachment-controller-tests.js",
     "test-mediaitem": "mocha ./test/media-item-controller-tests.js  --timeout 25000 --colors"

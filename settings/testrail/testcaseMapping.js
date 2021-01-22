@@ -29,5 +29,22 @@ module.exports = {
             "testName": "It should be able to delete an attachment for a media item",
             "id": 1184489
         }]
+    },
+    "partNTTests": {
+        "description": "Part endpoints",
+        "mediaItemUnderTest" : 5791,
+        "testSuiteId": suiteId,
+        "tests": [{
+            "testName": "It should be able to create a part for a mediaitem",
+            "id": 1184496
+        },
+        {
+            "testName": "It should be able to delete a part for a mediaitem",
+            "id": 1184497
+        },
+        {
+            "testName": "It should be able to bulk create a part for a mediaitem",
+            "id": 1184498
+        }]
     }
 }
