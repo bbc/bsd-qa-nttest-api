@@ -46,5 +46,26 @@ module.exports = {
             "testName": "It should be able to bulk create a part for a mediaitem",
             "id": 1184498
         }]
+    },
+    "renditionNTTests": {
+        "description": "Rendition endpoints",
+        "mediaItemUnderTest" : 5791,
+        "testSuiteId": suiteId,
+        "tests": [{
+            "testName": "It should be able to create a rendition for a mediaitem",
+            "id": 1184503
+        },
+        {
+            "testName": "It should be able to return a rendition for a mediaitem",
+            "id": 1184504
+        },
+        {
+            "testName": "It should be able to amend a rendition for a mediaitem",
+            "id": 1184505
+        },
+        {
+            "testName": "It should be able to delete a rendition for a mediaitem",
+            "id": 1184506
+        }]
     }
 }

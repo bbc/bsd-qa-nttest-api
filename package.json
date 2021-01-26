@@ -15,6 +15,12 @@
     "test-create-part": "mocha -g 'It should be able to create a part for a mediaitem' --config './settings/.mocharc.js'",
     "test-delete-part": "mocha -g 'It should be able to delete a part for a mediaitem' --config './settings/.mocharc.js'",
     "test-bulk-create-part": "mocha -g 'It should be able to bulk create a part for a mediaitem' --config './settings/.mocharc.js'",
+
+    "test-edit-rendition": "mocha -g 'It should be able to amend a rendition for a mediaitem' --config './settings/.mocharc.js'",
+    "test-get-rendition": "mocha -g 'It should be able to return a rendition for a mediaitem' --config './settings/.mocharc.js'",
+    "test-create-rendition": "mocha -g 'It should be able to create a rendition for a mediaitem' --config './settings/.mocharc.js'",
+    "test-delete-rendition": "mocha -g 'It should be able to delete a rendition for a mediaitem' --config './settings/.mocharc.js'",
+    
     "test-publish-placeholder": "mocha -g 'It should be able to create a placeholder' --config './settings/.mocharc.js'",
     "test-attachment": "mocha ./test/attachment-controller-tests.js",
     "test-mediaitem": "mocha ./test/media-item-controller-tests.js  --timeout 25000 --colors"
