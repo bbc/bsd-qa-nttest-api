@@ -178,7 +178,58 @@ describe('Rendition endpoints', function(){
             });
     });
 
-    // it('It should be able to delete a rendition for a mediaitem', function(done){
-    //     testRunCaseId = trTestRunCases.renditionNTTests.tests[3].id;
-    // });
+    it('It should be able to return a rendition for a mediaitem', function(done){
+        testRunCaseId = trTestRunCases.renditionNTTests.tests[1].id;
+        api.get('/v1/mediaitem/site/' + siteId + '/item/' + ItemUnderTestId)
+        .set(auth)
+        .end(function(err, res){
+            res.status.should.equal(200);
+            allRenditions = res.body.renditions; 
+            allRenditions.forEach(function(rendition){
+                api.delete('/v1/rendition/site/' + siteId + '/item/' + ItemUnderTestId + '/rendition/' + rendition.id)
+                    .set(auth)
+                    .expect('Content-Type', /json/)
+                    .end(async function (err, res){
+                        await sleep(5000);
+                    });
+            
+            });
+        });   
+
+        api.post('/v1/rendition/site/' + siteId + '/item/' + ItemUnderTestId)
+            .set(auth)
+            .send(payloads[0])
+            .expect('Content-Type', /json/)
+            .end(async function (err, res){
+                try{
+                    expect(res.status).to.equal(202);
+                    updateResultVars(1, "request submitted successfully\n");
+                    expect(res.body).to.have.property('requestId');
+                    updateResultVars(1, "requestId returned\n");
+                    createRequestId = res.body.requestId;
+                    await sleep(5000);
+                    api.get('/v1/requeststatus/site/' + siteId + '/request/' + createRequestId)
+                        .set(auth)
+                        .expect('Content-Type', /json/)
+                        .end(async function (err, res){
+                            expect(res.status).to.equal(200);
+                            updateResultVars(1, "requeststatus available\n");
+                            createdRenditionId = res.body.entityIds[0].mediaitemPropertyId;
+                            await sleep(5000);
+                            api.get('/v1/rendition/site/' + siteId + '/item/' + ItemUnderTestId + '/rendition/' + createdRenditionId)
+                            .set(auth)
+                            .expect('Content-Type', /json/)
+                            .end(async function (err, res){
+                                expect(res.status).to.equal(200);
+                                updateResultVars(1, "created rendition " + createdRenditionId + " is able to be retrieved from GET request\n");
+                                await updateTestCase(runId, testRunCaseId);  
+                            });
+                        });
+                    }catch(e){
+                        updateResultVars(5, "Issue with retrieving the newly created rendition " + createdRenditionId + " for a media item: " +  e + "\n");
+                    }
+                    done();
+            });
+
+    });
 });
