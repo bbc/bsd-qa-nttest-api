@@ -132,5 +132,8 @@ module.exports = {
                 "pixelWidth": 3840
             }
         ]
+    },
+    {
+        "deletionDate": "2021-03-07T21:01:37.220Z"
     }]
 }
