@@ -61,6 +61,7 @@ describe('Rendition endpoints', function(){
                     });               
                 }catch(e){
                     updateResultVars(5, "Issue with create an rendition for a media item: " +  e + "\n");
+                    updateTestCase(runId, testRunCaseId);
                 }
                 done();  
             });   
@@ -106,6 +107,7 @@ describe('Rendition endpoints', function(){
 
             }catch(e){
                 updateResultVars(5, "Issue with create an rendition for a media item: " +  e + "\n");
+                updateTestCase(runId, testRunCaseId);
             }  
             done();  
         });   
@@ -172,6 +174,7 @@ describe('Rendition endpoints', function(){
                         });               
                   }catch(e){
                     updateResultVars(5, "Issue with amending the date for rendition for a media item: " +  e + "\n");
+                    updateTestCase(runId, testRunCaseId);
                   }
                   done();  
 
@@ -227,6 +230,7 @@ describe('Rendition endpoints', function(){
                         });
                     }catch(e){
                         updateResultVars(5, "Issue with retrieving the newly created rendition " + createdRenditionId + " for a media item: " +  e + "\n");
+                        updateTestCase(runId, testRunCaseId);
                     }
                     done();
             });

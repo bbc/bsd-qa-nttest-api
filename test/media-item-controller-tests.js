@@ -25,27 +25,25 @@ describe('Mediaitem endpoints', function(){
                 updateResultVars(1, "Request sent successfully with 202 \n");
                 expect(res.body).to.have.property('requestId');
                 updateResultVars(1, "Create request returns a requestId\n");
-            }catch(e){
-                updateResultVars(5, "Issue with sending request: " +  e + "\n");
-            }
-            createRequestId = res.body.requestId;
-            api.get('/v1/requeststatus/site/' + siteId + '/request/' + createRequestId)
-                .set(auth)
-                .expect('Content-Type', /json/)
-                .end(function (err, res){
-                  console.log(res.body);
-                  console.log("createRequestId: " + createRequestId);
-                  try{
-                    expect(res.status).to.equal(200);
-                    mediaItemId = res.body.mediaItemURN.mediaitemId;
-                    console.log("mediaItemId: " + mediaItemId);
-                    updateResultVars(1, "Tested creating mediaItem " +  mediaItemId + " successfully\n");
-                  }catch(e){
-                    updateResultVars(5, "Tested creating mediaItem Failed: " +  e + "\n");
-                  }                
-                  updateTestCase(runId, testRunCaseId);
-                });   
-            done();
+                createRequestId = res.body.requestId;
+                api.get('/v1/requeststatus/site/' + siteId + '/request/' + createRequestId)
+                    .set(auth)
+                    .expect('Content-Type', /json/)
+                    .end(async function (err, res){
+                      console.log(res.body);
+                      console.log("createRequestId: " + createRequestId);
+                      
+                        expect(res.status).to.equal(200);
+                        mediaItemId = res.body.mediaItemURN.mediaitemId;
+                        console.log("mediaItemId: " + mediaItemId);
+                        updateResultVars(1, "Tested creating mediaItem " +  mediaItemId + " successfully\n");
+                        await updateTestCase(runId, testRunCaseId);  
+                    });   
+                }catch(e){
+                  updateResultVars(5, "Tested creating mediaItem Failed: " +  e + "\n");
+                  updateTestCase(runId, testRunCaseId);  
+                }                      
+                done();
           });
   });
 
@@ -60,10 +58,11 @@ describe('Mediaitem endpoints', function(){
               console.log(res.body);
               res.status.should.equal(200);
               updateResultVars(1, "MediaItem 4198 can be returned\n");
+              updateTestCase(runId, testRunCaseId);
             }catch(e){
               updateResultVars(5, "Tested getting details of a mediaItem Failed: " + e + "\n");
+              updateTestCase(runId, testRunCaseId);
             }
-            updateTestCase(runId, testRunCaseId);
             done();
           });        
   });
@@ -81,10 +80,11 @@ describe('Mediaitem endpoints', function(){
               updateResultVars(1, "Edit request sent successfully with response 202\n");
               expect(res.body).to.have.property('requestId');
               updateResultVars(1, "Edit request returns a requestId\n");
+              updateTestCase(runId, testRunCaseId);
             }catch(e){
               updateResultVars(5, "Tested amending details of a mediaItem Failed: " + e + "\n");
+              updateTestCase(runId, testRunCaseId);
             }
-            updateTestCase(runId, testRunCaseId);
             done();
           });
   });

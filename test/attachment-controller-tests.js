@@ -47,6 +47,7 @@ describe('Attachment endpoints', function(){
                 });               
               }catch(e){
                 updateResultVars(5, "Issue with create an attachment for a media item: " +  e + "\n");
+                updateTestCase(runId, testRunCaseId);
               }
               done();  
             });   
@@ -91,6 +92,7 @@ describe('Attachment endpoints', function(){
 
                 }catch(e){
                     updateResultVars(5, "Issue with create an attachment for a media item: " +  e + "\n");
+                    updateTestCase(runId, testRunCaseId);
                 }  
                 done();  
             });   

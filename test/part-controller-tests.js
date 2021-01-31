@@ -28,7 +28,7 @@ describe('Part endpoints', function(){
                     api.get('/v1/requeststatus/site/' + siteId + '/request/' + createRequestId)
                     .set(auth)
                     .expect('Content-Type', /json/)
-                    .end(function (err, res){
+                    .end(async function (err, res){
                         createdPartId = res.body.entityIds[0].mediaitemPropertyId
                         expect(res.status).to.equal(200);
                         updateResultVars(1, "requeststatus available\n");
@@ -40,12 +40,13 @@ describe('Part endpoints', function(){
                            allParts = res.body.parts; 
                            lastPartId = allParts[allParts.length - 1].id
                            expect(lastPartId).to.equal(createdPartId);    
-                           updateResultVars(1, "created Part " + createdPartId + " in the mediaitem " + ItemUnderTestId + "\n");  
-                           await updateTestCase(runId, testRunCaseId);                 
+                           updateResultVars(1, "created Part " + createdPartId + " in the mediaitem " + ItemUnderTestId + "\n");   
+                           await updateTestCase(runId, testRunCaseId);                
                         });                
                     });               
                   }catch(e){
                     updateResultVars(5, "Issue with create an Part for a media item: " +  e + "\n");
+                    updateTestCase(runId, testRunCaseId);  
                   }
                   done();  
             });   
@@ -83,13 +84,14 @@ describe('Part endpoints', function(){
                                         lastPartId = allParts[allParts.length - 1].id
                                         expect(lastPartId).not.to.equal(createdPartId);   
                                         updateResultVars(1, "checked that part " + createdPartId + " has been removed from " + mediaItemId + "\n"); 
-                                        updateTestCase(runId, testRunCaseId);
+                                        await updateTestCase(runId, testRunCaseId);
                                     });
                             });
                     }); 
 
             }catch(e){
                 updateResultVars(5, "Issue with create an part for a media item: " +  e + "\n");
+                updateTestCase(runId, testRunCaseId);
             }  
             done();  
         });   
@@ -144,6 +146,7 @@ describe('Part endpoints', function(){
                     });               
                   }catch(e){
                     updateResultVars(5, "Issue with create an Part for a media item: " +  e + "\n");
+                    updateTestCase(runId, testRunCaseId); 
                   }
                   done();  
             });         
