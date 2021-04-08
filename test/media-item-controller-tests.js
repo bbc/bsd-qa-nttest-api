@@ -3,13 +3,17 @@ const testrailApi = '../lib/test-rail-api';
 const payloadsUrl = './payloads/media-item-controller-test-payloads';
 const { payloads } = require(payloadsUrl);
 const { siteId, expect, should, supertest, api, auth, sleep, error, testrail, runId, trTestRunCases } = require(common);
-const { updateTestCase, updateResultVars } = require(testrailApi);
+const { resetResultVars, updateTestCase, updateResultVars } = require(testrailApi);
 
 var createRequestId, mediaItemId = 0;
 var testRunCaseId = '';
 var ItemUnderTestId = trTestRunCases.mediaItemNTTests.mediaItemUnderTest;
 
 describe('Mediaitem endpoints', function(){
+
+    before(async () => {  
+      resetResultVars;
+    });
     
     it('It should be possible to Create a mediaItem', function(done){
       testRunCaseId = trTestRunCases.mediaItemNTTests.tests[0].id;
@@ -57,7 +61,7 @@ describe('Mediaitem endpoints', function(){
               console.log(res.status);
               console.log(res.body);
               res.status.should.equal(200);
-              updateResultVars(1, "MediaItem 4198 can be returned\n");
+              updateResultVars(1, "MediaItem " + ItemUnderTestId + " can be returned\n");
               updateTestCase(runId, testRunCaseId);
             }catch(e){
               updateResultVars(5, "Tested getting details of a mediaItem Failed: " + e + "\n");

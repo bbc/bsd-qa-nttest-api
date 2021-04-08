@@ -2,7 +2,7 @@ const suiteId = 6923;
 module.exports = {
     "mediaItemNTTests": {
         "description": "Mediaitem endpoints",
-        "mediaItemUnderTest" : 4198,
+        "mediaItemUnderTest" : 523,
         "testSuiteId": suiteId,
         "tests": [{
             "testName": "It should be possible to Create a mediaItem",
@@ -19,7 +19,7 @@ module.exports = {
     },
     "attachmentNTTests": {
         "description": "Attachment endpoints",
-        "mediaItemUnderTest" : 5791,
+        "mediaItemUnderTest" : 530,
         "testSuiteId": suiteId,
         "tests": [{
             "testName": "It should be able to create an attachment for a media item",
@@ -32,7 +32,7 @@ module.exports = {
     },
     "partNTTests": {
         "description": "Part endpoints",
-        "mediaItemUnderTest" : 5791,
+        "mediaItemUnderTest" : 530,
         "testSuiteId": suiteId,
         "tests": [{
             "testName": "It should be able to create a part for a mediaitem",
@@ -49,7 +49,7 @@ module.exports = {
     },
     "renditionNTTests": {
         "description": "Rendition endpoints",
-        "mediaItemUnderTest" : 5791,
+        "mediaItemUnderTest" : 530,
         "testSuiteId": suiteId,
         "tests": [{
             "testName": "It should be able to create a rendition for a mediaitem",

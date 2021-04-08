@@ -1,6 +1,7 @@
+const common = '../../lib/common';
+const { siteId, keyframeServerURL, trTestRunCases } = require(common);
+var ItemUnderTestId = trTestRunCases.partNTTests.mediaItemUnderTest;
 var dateTime = new Date();
-var eventDate = dateTime.toISOString().split('Z')[0];
-var randString = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
 
 module.exports = {
     payloads:[{
@@ -10,10 +11,10 @@ module.exports = {
             "description": "inserted 1",
             "keyframe": {
                 "location": {
-                    "storeName": "76.key01",
-                    "path": "4743/keyframe-00000285.jpg"
+                    "storeName": siteId + ".key01",
+                    "path": ItemUnderTestId + "/keyframe-00000000.jpg"
                 },
-                "url": "https://test-media.jupiter.bbc.co.uk/keyframe/4743/keyframe-00000285.jpg"
+                "url": keyframeServerURL + "/keyframe/" + ItemUnderTestId + "/keyframe-00000000.jpg"
             },
             "rights": {
                 "copyright": "Dakota",
@@ -21,7 +22,7 @@ module.exports = {
                 "restrictions": "Normal restrictions"
             },
             "schemaVersion": "1-0-0",
-            "title": "keyframe-00000285"
+            "title": "keyframe-00000000"
         },
         "endFrame": 380,
         "schemaVersion": "1-0-0",
@@ -30,17 +31,17 @@ module.exports = {
     {
         "parts": [
           {
-            "creationDate": "2020-09-21T23:43:47.922Z",
+            "creationDate": dateTime,
             "creator": "system",
             "endFrame": 0,
             "partDetails": {
               "description": "this is a customized bulk post 1",
               "keyframe": {
                 "location": {
-                  "storeName": "76.key01",
-                 "path": "3754/keyframe-00000000.jpg"
+                  "storeName": siteId + ".key01",
+                  "path": ItemUnderTestId + "/keyframe-00000000.jpg"
                 },
-                "url": "https://test-media.jupiter.bbc.co.uk/keyframe/3754/keyframe-00000000.jpg"
+                "url": keyframeServerURL + "/keyframe/" + ItemUnderTestId + "/keyframe-00000000.jpg"
               },
               "rights": {
                 "copyright": "Chris Ahyow",
@@ -54,17 +55,17 @@ module.exports = {
             "startFrame": 0
           },
           {
-            "creationDate": "2020-09-21T23:43:47.922Z",
+            "creationDate": dateTime,
             "creator": "system",
             "endFrame": 0,
             "partDetails": {
               "description": "this is a customized bulk post 2",
               "keyframe": {
                 "location": {
-                  "storeName": "76.key01",
-                 "path": "3754/keyframe-00000000.jpg"
+                  "storeName": siteId + ".key01",
+                  "path": ItemUnderTestId + "/keyframe-00000000.jpg"
                 },
-                "url": "https://test-media.jupiter.bbc.co.uk/keyframe/3754/keyframe-00000000.jpg"
+                "url": keyframeServerURL + "/keyframe/" + ItemUnderTestId + "/keyframe-00000000.jpg"
               },
               "rights": {
                 "copyright": "Chris Ahyow",
@@ -78,17 +79,17 @@ module.exports = {
             "startFrame": 0
           },
           {
-            "creationDate": "2020-09-21T23:43:47.922Z",
+            "creationDate": dateTime,
             "creator": "system",
             "endFrame": 0,
             "partDetails": {
               "description": "this is a customized bulk post 3",
               "keyframe": {
                 "location": {
-                  "storeName": "76.key01",
-                 "path": "3754/keyframe-00000000.jpg"
+                  "storeName": siteId + ".key01",
+                  "path": ItemUnderTestId + "/keyframe-00000000.jpg"
                 },
-                "url": "https://test-media.jupiter.bbc.co.uk/keyframe/3754/keyframe-00000000.jpg"
+                "url": keyframeServerURL + "/keyframe/" + ItemUnderTestId + "/keyframe-00000000.jpg"
               },
               "rights": {
                 "copyright": "Chris Ahyow",
@@ -102,17 +103,17 @@ module.exports = {
             "startFrame": 0
           },
           {
-            "creationDate": "2020-09-21T23:43:47.922Z",
+            "creationDate": dateTime,
             "creator": "system",
             "endFrame": 0,
             "partDetails": {
               "description": "this is a customized bulk post 4",
               "keyframe": {
                 "location": {
-                  "storeName": "76.key01",
-                 "path": "3754/keyframe-00000000.jpg"
+                  "storeName": siteId + ".key01",
+                  "path": ItemUnderTestId + "/keyframe-00000000.jpg"
                 },
-                "url": "https://test-media.jupiter.bbc.co.uk/keyframe/3754/keyframe-00000000.jpg"
+                "url": keyframeServerURL + "/keyframe/" + ItemUnderTestId + "/keyframe-00000000.jpg"
               },
               "rights": {
                 "copyright": "Chris Ahyow",
@@ -126,17 +127,17 @@ module.exports = {
             "startFrame": 0
           },
           {
-            "creationDate": "2020-09-21T23:43:47.922Z",
+            "creationDate": dateTime,
             "creator": "system",
             "endFrame": 0,
             "partDetails": {
               "description": "this is a customized bulk post 5",
               "keyframe": {
                 "location": {
-                  "storeName": "76.key01",
-                 "path": "3754/keyframe-00000000.jpg"
+                  "storeName": siteId + ".key01",
+                  "path": ItemUnderTestId + "/keyframe-00000000.jpg"
                 },
-                "url": "https://test-media.jupiter.bbc.co.uk/keyframe/3754/keyframe-00000000.jpg"
+                "url": keyframeServerURL + "/keyframe/" + ItemUnderTestId + "/keyframe-00000000.jpg"
               },
               "rights": {
                 "copyright": "Chris Ahyow",

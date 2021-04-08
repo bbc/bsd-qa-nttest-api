@@ -1,5 +1,10 @@
 var dateTime = new Date();
 var eventDate = dateTime.toISOString().split('Z')[0];
+var deletionDateRaw = new Date();
+var deletionDate = deletionDateRaw.setDate(dateTime.getDate() + 1);
+
+const common = '../../lib/common';
+const { siteId, trTestRunCases } = require(common);
 
 module.exports = {
     payloads: [{
@@ -111,8 +116,8 @@ module.exports = {
             "offline"
         ],
         "location": {
-            "storeName": "76.diva_qa",
-            "path": "76.3754#FX0064.mov"
+            "storeName": siteId + ".diva_qa",
+            "path": siteId + ".3754#FX0064.mov"
         },
         "mimeType": "video/mp4",
         "schemaVersion": "1-0-0",

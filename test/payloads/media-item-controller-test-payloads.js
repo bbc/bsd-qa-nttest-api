@@ -73,7 +73,7 @@ module.exports = {
         ],
         "description": "test amending item with string " + randString,
         "details": "zzivanregression",
-        "eventDate": "2020-08-11T20:34:33.015",
+        "eventDate": eventDate,
         "isBestMedia": true,
         "outlet": "BBCNews",
         "pictureFormat": "16x9",
@@ -86,6 +86,6 @@ module.exports = {
         "soundFormat": "Mono",
         "source": "from Tooting",
         "status": "Finished",
-        "story": "zzivanregression25-9-2020-13:48"
+        "story": "zzivanregression" + eventDate
     }]
 }
