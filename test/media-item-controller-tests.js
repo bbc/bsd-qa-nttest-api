@@ -22,7 +22,6 @@ describe('Mediaitem endpoints', function(){
           .send(payloads[0])
           .expect('Content-Type', /json/)
           .end(async function (err, res){
-            console.log(res.body);
             await sleep(5000);
             try{
                 expect(res.status).to.equal(202);
@@ -34,9 +33,7 @@ describe('Mediaitem endpoints', function(){
                     .set(auth)
                     .expect('Content-Type', /json/)
                     .end(async function (err, res){
-                      console.log(res.body);
-                      console.log("createRequestId: " + createRequestId);
-                      
+                      console.log("createRequestId: " + createRequestId);                 
                         expect(res.status).to.equal(200);
                         mediaItemId = res.body.mediaItemURN.mediaitemId;
                         console.log("mediaItemId: " + mediaItemId);
@@ -58,8 +55,6 @@ describe('Mediaitem endpoints', function(){
           .set(auth)
           .end(function(err, res){
             try{
-              console.log(res.status);
-              console.log(res.body);
               res.status.should.equal(200);
               updateResultVars(1, "MediaItem " + ItemUnderTestId + " can be returned\n");
               updateTestCase(runId, testRunCaseId);
@@ -79,7 +74,6 @@ describe('Mediaitem endpoints', function(){
           .expect('Content-Type', /json/)
           .end(function (err, res){
             try{
-              console.log(res.body);
               expect(res.status).to.equal(202);
               updateResultVars(1, "Edit request sent successfully with response 202\n");
               expect(res.body).to.have.property('requestId');

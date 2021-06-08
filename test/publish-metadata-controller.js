@@ -37,9 +37,6 @@ describe('Publish metadata endpoints', function(){
             )
             .expect('Content-Type', /json/)
             .end(function(err,res){
-                console.log(res.status);
-                // expect(res.status).to.equal(200);
-                console.log(res.body);
                 done();
             });
     });

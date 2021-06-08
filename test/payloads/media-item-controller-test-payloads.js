@@ -19,7 +19,7 @@ module.exports = {
             "position": "Camera"
           }
         ],
-        "description": "post mediatem test - dateTime",
+        "description": "post mediatem test - " + dateTime,
         "details": "proxyless test",
         "editorialRights": {
           "restrictions": "Disney",

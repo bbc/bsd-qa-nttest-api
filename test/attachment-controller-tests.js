@@ -14,6 +14,8 @@ describe('Attachment endpoints', function(){
 
     it('It should be able to create an attachment for a media item', function(done){
         testRunCaseId = trTestRunCases.attachmentNTTests.tests[0].id;
+        console.log("siteId = "+ siteId);
+        console.log("ItemUnderTestId = "+ ItemUnderTestId);
         api.post('/v1/attachment/site/' + siteId + '/item/' + ItemUnderTestId)
             .set(auth)
             .send(payloads[0])
